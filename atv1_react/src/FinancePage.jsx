@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from './auth/AuthContext.js';
 import Accordion from './components/Accordion.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
 import Tabs from './components/Tabs.jsx';
@@ -26,6 +27,7 @@ const information = [
 ];
 
 export default function FinancePage() {
+  const { user, logout } = useAuth();
   const [toast, setToast] = useState(null);
   const dismissToast = () => setToast(null);
   const expenses = sampleTransactions
@@ -70,6 +72,10 @@ export default function FinancePage() {
       <header>
         <h1>Controle de finanças</h1>
         <p>Exemplo de receitas, despesas e orçamento mensal.</p>
+        <div className="session-toolbar">
+          <span>Usuário: {user.username}</span>
+          <button type="button" onClick={logout}>Sair</button>
+        </div>
       </header>
       <Tabs tabs={tabs} label="Seções do controle financeiro" />
       <section className="information" aria-label="Informações">

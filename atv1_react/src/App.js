@@ -1,6 +1,6 @@
 import { createElement } from 'react';
-import FinancePage from './FinancePage.jsx';
+import AppRoutes from './AppRoutes.jsx';
 
 export default function App() {
-  return createElement(FinancePage);
+  return createElement(AppRoutes);
 }
