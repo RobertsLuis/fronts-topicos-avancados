@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Exemplo de controle de finanças com Tailwind CSS e JavaScript."
+    />
+    <title>Controle de finanças — Tailwind</title>
+  </head>
+  <body class="bg-white font-sans text-base leading-relaxed text-neutral-900">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:outline-2 focus:outline-black"
+      >Pular para o conteúdo</a
+    >
+
+    <header class="border-b border-neutral-300">
+      <div
+        class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6"
+      >
+        <a
+          href="#main-content"
+          class="text-lg font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          >Controle de finanças</a
+        >
+        <button
+          id="menu-toggle"
+          type="button"
+          aria-controls="navigation-menu"
+          aria-expanded="false"
+          class="rounded border border-neutral-400 px-3 py-2 hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black md:hidden"
+        >
+          Menu
+        </button>
+        <nav
+          id="navigation-menu"
+          aria-label="Navegação principal"
+          class="hidden w-full flex-col gap-2 md:flex md:w-auto md:flex-row md:gap-6"
+        >
+          <a
+            href="#summary"
+            class="rounded py-2 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >Resumo</a
+          >
+          <a
+            href="#transactions"
+            class="rounded py-2 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >Lançamentos</a
+          >
+          <a
+            href="#new-transaction"
+            class="rounded py-2 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >Novo lançamento</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main
+      id="main-content"
+      class="mx-auto max-w-5xl space-y-8 px-4 py-8 sm:px-6"
+    >
+      <div>
+        <h1 class="text-2xl font-bold sm:text-3xl">Controle de finanças</h1>
+        <p class="mt-2 text-neutral-600">
+          Dados fictícios para organizar receitas e despesas.
+        </p>
+      </div>
+
+      <section
+        id="finance-carousel"
+        aria-label="Dicas de organização financeira"
+        aria-roledescription="carrossel"
+        class="overflow-hidden rounded border border-neutral-300 bg-neutral-50"
+      >
+        <div class="overflow-hidden">
+          <div
+            id="carousel-track"
+            class="flex transition-transform duration-300 ease-in-out motion-reduce:transition-none"
+          >
+            <article
+              class="w-full shrink-0 px-5 py-6 sm:px-6"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="1 de 3"
+            >
+              <h2 class="text-xl font-bold">Planejar gastos</h2>
+              <p class="mt-2">
+                Defina um limite para suas despesas antes de começar o mês.
+              </p>
+            </article>
+            <article
+              class="w-full shrink-0 px-5 py-6 sm:px-6"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="2 de 3"
+              aria-hidden="true"
+              inert
+            >
+              <h2 class="text-xl font-bold">Registrar receitas</h2>
+              <p class="mt-2">
+                Anote o dinheiro recebido para acompanhar suas entradas.
+              </p>
+            </article>
+            <article
+              class="w-full shrink-0 px-5 py-6 sm:px-6"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="3 de 3"
+              aria-hidden="true"
+              inert
+            >
+              <h2 class="text-xl font-bold">Revisar o mês</h2>
+              <p class="mt-2">
+                Compare receitas e despesas para entender seu saldo.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div
+          class="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-300 px-4 py-3 sm:px-6"
+        >
+          <button
+            id="previous-slide"
+            type="button"
+            class="rounded border border-neutral-400 bg-white px-3 py-2 text-sm hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+            Anterior
+          </button>
+          <div
+            class="order-3 flex basis-full justify-center gap-1 sm:order-none sm:basis-auto"
+            role="group"
+            aria-label="Selecionar slide"
+          >
+            <button
+              type="button"
+              data-slide-index="0"
+              aria-label="Ir para slide 1"
+              aria-current="true"
+              class="flex h-9 w-9 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              <span class="h-2.5 w-2.5 rounded-full bg-neutral-900"></span>
+            </button>
+            <button
+              type="button"
+              data-slide-index="1"
+              aria-label="Ir para slide 2"
+              class="flex h-9 w-9 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              <span class="h-2.5 w-2.5 rounded-full bg-neutral-400"></span>
+            </button>
+            <button
+              type="button"
+              data-slide-index="2"
+              aria-label="Ir para slide 3"
+              class="flex h-9 w-9 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              <span class="h-2.5 w-2.5 rounded-full bg-neutral-400"></span>
+            </button>
+          </div>
+          <button
+            id="next-slide"
+            type="button"
+            class="rounded border border-neutral-400 bg-white px-3 py-2 text-sm hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+            Próximo
+          </button>
+        </div>
+        <p
+          id="slide-status"
+          class="sr-only"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          Slide 1 de 3: Planejar gastos.
+        </p>
+      </section>
+
+      <section id="summary" aria-labelledby="summary-title" class="scroll-mt-4">
+        <h2 id="summary-title" class="mb-4 text-xl font-bold">Resumo</h2>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <article class="rounded border border-neutral-300 p-5">
+            <h3 class="font-bold">Receitas</h3>
+            <p class="my-2 text-2xl font-bold">R$ 3.500,00</p>
+            <p class="text-sm text-neutral-600">
+              Total de entradas no período.
+            </p>
+          </article>
+          <article class="rounded border border-neutral-300 p-5">
+            <h3 class="font-bold">Despesas</h3>
+            <p class="my-2 text-2xl font-bold">R$ 1.500,00</p>
+            <p class="text-sm text-neutral-600">Total de saídas no período.</p>
+          </article>
+          <article class="rounded border border-neutral-300 p-5">
+            <h3 class="font-bold">Saldo</h3>
+            <p class="my-2 text-2xl font-bold">R$ 2.000,00</p>
+            <p class="text-sm text-neutral-600">
+              Diferença entre receitas e despesas.
+            </p>
+          </article>
+        </div>
+        <button
+          id="open-review"
+          type="button"
+          class="mt-4 rounded border border-neutral-900 px-4 py-2 hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Revisar orçamento
+        </button>
+        <p id="review-status" role="status" class="mt-2 text-sm"></p>
+      </section>
+
+      <section
+        id="transactions"
+        aria-labelledby="transactions-title"
+        class="scroll-mt-4"
+      >
+        <h2 id="transactions-title" class="mb-4 text-xl font-bold">
+          Lançamentos
+        </h2>
+        <div
+          role="region"
+          aria-label="Tabela de lançamentos"
+          tabindex="0"
+          class="overflow-x-auto rounded border border-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          <table class="w-full min-w-[440px] border-collapse text-left">
+            <caption class="sr-only">
+              Oito lançamentos fictícios de receitas e despesas.
+            </caption>
+            <thead class="bg-neutral-200">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-bold">Descrição</th>
+                <th scope="col" class="px-4 py-3 font-bold">Tipo</th>
+                <th scope="col" class="px-4 py-3 text-right font-bold">
+                  Valor
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200">
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Salário</td>
+                <td class="px-4 py-3">Receita</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                  R$ 3.000,00
+                </td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Aluguel</td>
+                <td class="px-4 py-3">Despesa</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                  R$ 900,00
+                </td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Supermercado</td>
+                <td class="px-4 py-3">Despesa</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                  R$ 250,00
+                </td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Transporte</td>
+                <td class="px-4 py-3">Despesa</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                  R$ 120,00
+                </td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Internet</td>
+                <td class="px-4 py-3">Despesa</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                  R$ 100,00
+                </td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Freelance</td>
+                <td class="px-4 py-3">Receita</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                  R$ 500,00
+                </td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Farmácia</td>
+                <td class="px-4 py-3">Despesa</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">R$ 80,00</td>
+              </tr>
+              <tr class="odd:bg-white even:bg-neutral-100">
+                <td class="px-4 py-3">Cinema</td>
+                <td class="px-4 py-3">Despesa</td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">R$ 50,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section
+        id="new-transaction"
+        aria-labelledby="form-title"
+        class="scroll-mt-4"
+      >
+        <h2 id="form-title" class="text-xl font-bold">Novo lançamento</h2>
+        <p class="mt-2 text-sm text-neutral-600">
+          Formulário de demonstração. O envio não altera nem salva os
+          lançamentos.
+        </p>
+        <form id="transaction-form" class="mt-4 grid gap-4 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="description" class="mb-1 block font-bold"
+              >Descrição</label
+            >
+            <input
+              id="description"
+              name="description"
+              type="text"
+              required
+              minlength="2"
+              maxlength="80"
+              autocomplete="off"
+              class="w-full rounded border border-neutral-400 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            />
+          </div>
+          <div>
+            <label for="amount" class="mb-1 block font-bold">Valor (R$)</label>
+            <input
+              id="amount"
+              name="amount"
+              type="number"
+              required
+              min="0.01"
+              max="1000000"
+              step="0.01"
+              inputmode="decimal"
+              class="w-full rounded border border-neutral-400 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            />
+          </div>
+          <div>
+            <label for="type" class="mb-1 block font-bold">Tipo</label>
+            <select
+              id="type"
+              name="type"
+              required
+              class="w-full rounded border border-neutral-400 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              <option value="">Selecione</option>
+              <option value="income">Receita</option>
+              <option value="expense">Despesa</option>
+            </select>
+          </div>
+          <div>
+            <label for="date" class="mb-1 block font-bold">Data</label>
+            <input
+              id="date"
+              name="date"
+              type="date"
+              required
+              min="2000-01-01"
+              max="2100-12-31"
+              class="min-w-0 w-full rounded border border-neutral-400 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            />
+          </div>
+          <div class="sm:col-span-2">
+            <button
+              type="submit"
+              class="rounded border border-neutral-900 bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Enviar lançamento
+            </button>
+            <p id="form-status" role="status" class="mt-2 text-sm"></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer
+      class="border-t border-neutral-300 px-4 py-5 text-center text-sm text-neutral-600"
+    >
+      Atividade de Tailwind CSS — dados fictícios.
+    </footer>
+
+    <dialog
+      id="budget-dialog"
+      aria-labelledby="dialog-title"
+      aria-describedby="dialog-description"
+      class="m-auto max-h-[90vh] w-[calc(100%_-_2rem)] max-w-md overflow-y-auto rounded border border-neutral-400 bg-white p-6 text-neutral-900 backdrop:bg-black/40"
+    >
+      <h2 id="dialog-title" class="text-xl font-bold">Revisar orçamento</h2>
+      <p id="dialog-description" class="mt-3">
+        As despesas somam R$ 1.500,00 de um limite de R$ 2.000,00. Restam R$
+        500,00 no orçamento.
+      </p>
+      <form method="dialog" class="mt-5 flex flex-wrap justify-end gap-3">
+        <button
+          type="submit"
+          value="cancel"
+          autofocus
+          class="rounded border border-neutral-400 px-4 py-2 hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          value="confirm"
+          class="rounded border border-neutral-900 bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Confirmar revisão
+        </button>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
