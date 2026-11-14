@@ -5,7 +5,15 @@
   </header>
   <finance-tabs>
     <finance-tab title="Lançamentos" tab-id="transactions">
-      <div class="list-toolbar"><h2>Lançamentos do mês</h2></div>
+      <div class="list-toolbar">
+        <h2>Lançamentos do mês</h2>
+        <finance-dropdown
+          options="typeOptions"
+          value="selectedType"
+          label="Tipo"
+          on-change="changeType(value)"
+        ></finance-dropdown>
+      </div>
       <div
         class="table-container"
         role="region"

@@ -196,3 +196,43 @@ footer {
 .page-button.is-active:hover {
   background: #333;
 }
+
+.dropdown {
+  position: relative;
+  max-width: 100%;
+}
+
+.dropdown-trigger {
+  max-width: 100%;
+  text-align: left;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  min-width: 100%;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  border: 1px solid #777;
+  background: #fff;
+}
+
+.dropdown-option {
+  width: 100%;
+  border: 0;
+  text-align: left;
+}
+
+.dropdown-option.is-selected {
+  background: #eee;
+  font-weight: bold;
+}
+
+@media (max-width: 560px) {
+  .dropdown-trigger {
+    width: 100%;
+  }
+}

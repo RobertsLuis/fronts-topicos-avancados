@@ -6,9 +6,19 @@ export default function registerFinanceController(app) {
       $scope.transactions = FinanceData.getTransactions();
       const pageSize = 4;
       $scope.currentPage = 1;
+      $scope.selectedType = 'all';
+      $scope.typeOptions = [
+        { value: 'all', label: 'Todos' },
+        { value: 'income', label: 'Receitas' },
+        { value: 'expense', label: 'Despesas' },
+      ];
 
       function updateTransactions() {
-        const filteredTransactions = $scope.transactions;
+        const filteredTransactions = $scope.transactions.filter(
+          (transaction) =>
+            $scope.selectedType === 'all' ||
+            transaction.type === $scope.selectedType,
+        );
         $scope.totalPages = Math.max(
           1,
           Math.ceil(filteredTransactions.length / pageSize),
@@ -22,6 +32,12 @@ export default function registerFinanceController(app) {
 
       $scope.changePage = (page) => {
         $scope.currentPage = page;
+        updateTransactions();
+      };
+
+      $scope.changeType = (value) => {
+        $scope.selectedType = value;
+        $scope.currentPage = 1;
         updateTransactions();
       };
 

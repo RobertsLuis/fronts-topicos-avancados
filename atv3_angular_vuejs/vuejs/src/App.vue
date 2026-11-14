@@ -3,9 +3,10 @@ import { transactions } from './transactions.js';
 import { formatCurrency } from './formatCurrency.js';
 import AppTabs from './components/AppTabs.vue';
 import AppPagination from './components/AppPagination.vue';
+import AppDropdown from './components/AppDropdown.vue';
 
 export default {
-  components: { AppTabs, AppPagination },
+  components: { AppTabs, AppPagination, AppDropdown },
   data() {
     return {
       transactions,
@@ -15,19 +16,38 @@ export default {
       ],
       currentPage: 1,
       pageSize: 4,
+      selectedType: 'all',
+      typeOptions: [
+        { value: 'all', label: 'Todos' },
+        { value: 'income', label: 'Receitas' },
+        { value: 'expense', label: 'Despesas' },
+      ],
     };
   },
   computed: {
+    filteredTransactions() {
+      return this.transactions.filter(
+        (transaction) =>
+          this.selectedType === 'all' || transaction.type === this.selectedType,
+      );
+    },
     totalPages() {
-      return Math.max(1, Math.ceil(this.transactions.length / this.pageSize));
+      return Math.max(
+        1,
+        Math.ceil(this.filteredTransactions.length / this.pageSize),
+      );
     },
     visibleTransactions() {
       const start = (this.currentPage - 1) * this.pageSize;
-      return this.transactions.slice(start, start + this.pageSize);
+      return this.filteredTransactions.slice(start, start + this.pageSize);
     },
   },
   methods: {
     formatCurrency,
+    changeType(value) {
+      this.selectedType = value;
+      this.currentPage = 1;
+    },
   },
 };
 </script>
@@ -40,7 +60,15 @@ export default {
     </header>
     <AppTabs :items="tabs">
       <template #transactions>
-        <div class="list-toolbar"><h2>Lançamentos do mês</h2></div>
+        <div class="list-toolbar">
+          <h2>Lançamentos do mês</h2>
+          <AppDropdown
+            :options="typeOptions"
+            :value="selectedType"
+            label="Tipo"
+            @change="changeType"
+          />
+        </div>
         <div
           class="table-container"
           role="region"
