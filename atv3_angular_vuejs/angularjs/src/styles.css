@@ -155,3 +155,24 @@ footer {
   color: #555;
   font-size: 14px;
 }
+
+.tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid #bbb;
+}
+
+.tab-button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-button.is-active {
+  border-bottom-color: #111;
+  font-weight: bold;
+}
+
+.tab-panel {
+  padding-top: 20px;
+}

@@ -3,36 +3,46 @@
     <h1>Controle de finanças</h1>
     <p>Exemplo de receitas, despesas e orçamento mensal.</p>
   </header>
-  <section>
-    <div class="list-toolbar"><h2>Lançamentos do mês</h2></div>
-    <div
-      class="table-container"
-      role="region"
-      aria-label="Lançamentos"
-      tabindex="0"
-    >
-      <table>
-        <caption class="visually-hidden">
-          Receitas e despesas do mês
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Descrição</th>
-            <th scope="col">Tipo</th>
-            <th scope="col" class="amount">Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            ng-repeat="transaction in visibleTransactions track by transaction.id"
-          >
-            <td>{{ transaction.description }}</td>
-            <td>{{ transaction.type === 'income' ? 'Receita' : 'Despesa' }}</td>
-            <td class="amount">{{ transaction.amount | money }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <finance-tabs>
+    <finance-tab title="Lançamentos" tab-id="transactions">
+      <div class="list-toolbar"><h2>Lançamentos do mês</h2></div>
+      <div
+        class="table-container"
+        role="region"
+        aria-label="Lançamentos"
+        tabindex="0"
+      >
+        <table>
+          <caption class="visually-hidden">
+            Receitas e despesas do mês
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Descrição</th>
+              <th scope="col">Tipo</th>
+              <th scope="col" class="amount">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="transaction in visibleTransactions track by transaction.id"
+            >
+              <td>{{ transaction.description }}</td>
+              <td>
+                {{ transaction.type === 'income' ? 'Receita' : 'Despesa' }}
+              </td>
+              <td class="amount">{{ transaction.amount | money }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </finance-tab>
+    <finance-tab title="Orçamento" tab-id="budget">
+      <section class="budget">
+        <h2>Orçamento mensal</h2>
+        <p>Consulte o limite mensal para planejar suas despesas.</p>
+      </section>
+    </finance-tab>
+  </finance-tabs>
   <footer>Dados fictícios para a atividade de AngularJS.</footer>
 </main>
