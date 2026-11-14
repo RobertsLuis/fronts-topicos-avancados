@@ -8,25 +8,120 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   min-width: 320px;
 }
+
+[ng-cloak],
+[hidden] {
+  display: none !important;
+}
+
+finance-tabs,
+finance-tab,
+finance-dropdown,
+finance-pagination,
+finance-progress,
+finance-accordion,
+finance-toast {
+  display: block;
+}
+
 .app {
   max-width: 860px;
   margin: 45px auto;
   padding: 0 24px;
 }
+
 h1 {
-  font-size: 28px;
   margin: 0 0 12px;
+  font-size: 28px;
 }
+
 h2 {
+  margin: 24px 0 16px;
   font-size: 20px;
 }
+
 p {
   line-height: 1.5;
 }
+
+header {
+  margin-bottom: 28px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid #777;
+  color: #111;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #eee;
+}
+
+button:disabled {
+  color: #777;
+  cursor: default;
+}
+
+:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+.list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.list-toolbar h2,
+.list-toolbar p {
+  margin: 0;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+caption {
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.amount {
+  text-align: right;
+  white-space: nowrap;
+}
+
 @media (max-width: 560px) {
   .app {
     margin: 24px auto;
@@ -35,4 +130,28 @@ p {
   h1 {
     font-size: 24px;
   }
+  .list-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  th,
+  td {
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+footer {
+  margin-top: 28px;
+  color: #555;
+  font-size: 14px;
 }
