@@ -7,10 +7,13 @@ import registerPagination from './directives/pagination.js';
 import registerDropdown from './directives/dropdown.js';
 import registerProgress from './directives/progress.js';
 import registerAccordion from './directives/accordion.js';
+import registerToast from './directives/toast.js';
+import registerNotificationService from './services/notificationService.js';
 
 const dataModule = window.angular.module('finance.data', []);
 registerFinanceData(dataModule);
 registerMoneyFilter(dataModule);
+registerNotificationService(dataModule);
 
 const componentsModule = window.angular.module('finance.components', []);
 registerTabs(componentsModule);
@@ -18,6 +21,7 @@ registerPagination(componentsModule);
 registerDropdown(componentsModule);
 registerProgress(componentsModule);
 registerAccordion(componentsModule);
+registerToast(componentsModule);
 
 const app = window.angular.module('financeApp', [
   dataModule.name,

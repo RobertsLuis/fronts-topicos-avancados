@@ -6,6 +6,7 @@ import AppPagination from './components/AppPagination.vue';
 import AppDropdown from './components/AppDropdown.vue';
 import AppProgress from './components/AppProgress.vue';
 import AppAccordion from './components/AppAccordion.vue';
+import AppToast from './components/AppToast.vue';
 
 export default {
   components: {
@@ -14,6 +15,7 @@ export default {
     AppDropdown,
     AppProgress,
     AppAccordion,
+    AppToast,
   },
   data() {
     return {
@@ -45,6 +47,7 @@ export default {
             'O percentual corresponde às despesas divididas pelo limite mensal. As receitas não entram nesse cálculo.',
         },
       ],
+      notification: null,
     };
   },
   computed: {
@@ -87,6 +90,12 @@ export default {
     changeType(value) {
       this.selectedType = value;
       this.currentPage = 1;
+    },
+    completeReview() {
+      this.notification = {
+        id: crypto.randomUUID(),
+        message: 'Revisão dos lançamentos concluída.',
+      };
     },
   },
 };
@@ -145,6 +154,9 @@ export default {
           :total-pages="totalPages"
           @change="currentPage = $event"
         />
+        <button type="button" class="primary-button" @click="completeReview">
+          Concluir revisão
+        </button>
       </template>
       <template #budget>
         <section class="budget">
@@ -189,5 +201,6 @@ export default {
       <AppAccordion :items="information" />
     </section>
     <footer>Dados fictícios para a atividade de Vue.js.</footer>
+    <AppToast :notification="notification" @dismiss="notification = null" />
   </main>
 </template>

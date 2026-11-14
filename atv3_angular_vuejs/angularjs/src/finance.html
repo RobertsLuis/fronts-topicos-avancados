@@ -49,6 +49,9 @@
         total-pages="totalPages"
         on-page-change="changePage(page)"
       ></finance-pagination>
+      <button type="button" class="primary-button" ng-click="completeReview()">
+        Concluir revisão
+      </button>
     </finance-tab>
     <finance-tab title="Orçamento" tab-id="budget">
       <section class="budget">
@@ -92,4 +95,5 @@
     <finance-accordion items="information"></finance-accordion>
   </section>
   <footer>Dados fictícios para a atividade de AngularJS.</footer>
+  <finance-toast></finance-toast>
 </main>

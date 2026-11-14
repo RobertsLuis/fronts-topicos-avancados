@@ -2,7 +2,8 @@ export default function registerFinanceController(app) {
   app.controller('FinanceController', [
     '$scope',
     'FinanceData',
-    function FinanceController($scope, FinanceData) {
+    'NotificationService',
+    function FinanceController($scope, FinanceData, NotificationService) {
       $scope.transactions = FinanceData.getTransactions();
       const pageSize = 4;
       $scope.currentPage = 1;
@@ -66,6 +67,9 @@ export default function registerFinanceController(app) {
           : 0;
       };
       $scope.updateBudget();
+
+      $scope.completeReview = () =>
+        NotificationService.show('Revisão dos lançamentos concluída.');
 
       updateTransactions();
     },
