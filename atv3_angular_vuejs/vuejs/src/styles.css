@@ -236,3 +236,57 @@ footer {
     width: 100%;
   }
 }
+
+.budget {
+  max-width: 520px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.form-field input {
+  width: 100%;
+  min-width: 0;
+  max-width: 280px;
+  padding: 10px;
+  border: 1px solid #777;
+  border-radius: 0;
+  color: #111;
+  background: #fff;
+}
+
+.error {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.progress {
+  margin: 20px 0;
+}
+
+.progress-caption {
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 16px;
+  overflow: hidden;
+  border: 1px solid #777;
+  background: #eee;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #111;
+  transition: width 180ms ease;
+}
+
+.field-hint {
+  margin: 0;
+  color: #444;
+  font-size: 14px;
+}

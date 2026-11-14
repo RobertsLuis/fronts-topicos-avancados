@@ -12,6 +12,8 @@ export default function registerFinanceController(app) {
         { value: 'income', label: 'Receitas' },
         { value: 'expense', label: 'Despesas' },
       ];
+      $scope.expenses = FinanceData.getExpenses();
+      $scope.budget = { limit: 2000 };
 
       function updateTransactions() {
         const filteredTransactions = $scope.transactions.filter(
@@ -40,6 +42,16 @@ export default function registerFinanceController(app) {
         $scope.currentPage = 1;
         updateTransactions();
       };
+
+      $scope.updateBudget = () => {
+        const limit = $scope.budget.limit;
+        $scope.budgetValid =
+          Number.isInteger(limit) && limit >= 1 && limit <= 1000000;
+        $scope.budgetPercentage = $scope.budgetValid
+          ? ($scope.expenses / (limit * 100)) * 100
+          : 0;
+      };
+      $scope.updateBudget();
 
       updateTransactions();
     },

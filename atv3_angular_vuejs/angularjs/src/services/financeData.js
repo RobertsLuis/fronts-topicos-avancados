@@ -5,5 +5,10 @@ export default function registerFinanceData(app) {
     getTransactions() {
       return transactions;
     },
+    getExpenses() {
+      return transactions
+        .filter((transaction) => transaction.type === 'expense')
+        .reduce((total, transaction) => total + transaction.amount, 0);
+    },
   }));
 }

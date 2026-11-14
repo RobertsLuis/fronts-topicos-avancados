@@ -5,6 +5,7 @@ import registerMoneyFilter from './filters/money.js';
 import registerTabs from './directives/tabs.js';
 import registerPagination from './directives/pagination.js';
 import registerDropdown from './directives/dropdown.js';
+import registerProgress from './directives/progress.js';
 
 const dataModule = window.angular.module('finance.data', []);
 registerFinanceData(dataModule);
@@ -14,6 +15,7 @@ const componentsModule = window.angular.module('finance.components', []);
 registerTabs(componentsModule);
 registerPagination(componentsModule);
 registerDropdown(componentsModule);
+registerProgress(componentsModule);
 
 const app = window.angular.module('financeApp', [
   dataModule.name,

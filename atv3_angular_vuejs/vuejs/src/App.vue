@@ -4,9 +4,10 @@ import { formatCurrency } from './formatCurrency.js';
 import AppTabs from './components/AppTabs.vue';
 import AppPagination from './components/AppPagination.vue';
 import AppDropdown from './components/AppDropdown.vue';
+import AppProgress from './components/AppProgress.vue';
 
 export default {
-  components: { AppTabs, AppPagination, AppDropdown },
+  components: { AppTabs, AppPagination, AppDropdown, AppProgress },
   data() {
     return {
       transactions,
@@ -22,6 +23,7 @@ export default {
         { value: 'income', label: 'Receitas' },
         { value: 'expense', label: 'Despesas' },
       ],
+      budgetLimit: 2000,
     };
   },
   computed: {
@@ -40,6 +42,23 @@ export default {
     visibleTransactions() {
       const start = (this.currentPage - 1) * this.pageSize;
       return this.filteredTransactions.slice(start, start + this.pageSize);
+    },
+    expenses() {
+      return this.transactions
+        .filter((transaction) => transaction.type === 'expense')
+        .reduce((total, transaction) => total + transaction.amount, 0);
+    },
+    budgetValid() {
+      return (
+        Number.isInteger(this.budgetLimit) &&
+        this.budgetLimit >= 1 &&
+        this.budgetLimit <= 1000000
+      );
+    },
+    budgetPercentage() {
+      return this.budgetValid
+        ? (this.expenses / (this.budgetLimit * 100)) * 100
+        : 0;
     },
   },
   methods: {
@@ -109,7 +128,39 @@ export default {
       <template #budget>
         <section class="budget">
           <h2>Orçamento mensal</h2>
-          <p>Consulte o limite mensal para planejar suas despesas.</p>
+          <p>
+            Despesas: <strong>{{ formatCurrency(expenses) }}</strong>
+          </p>
+          <div class="form-field">
+            <label for="budget-limit">Limite mensal em reais</label>
+            <input
+              id="budget-limit"
+              v-model.number="budgetLimit"
+              type="number"
+              min="1"
+              max="1000000"
+              step="1"
+              required
+              aria-describedby="budget-hint budget-error"
+              :aria-invalid="!budgetValid"
+            />
+            <p id="budget-hint" class="field-hint">
+              Informe um valor inteiro de R$ 1 a R$ 1.000.000.
+            </p>
+            <p
+              id="budget-error"
+              class="error"
+              role="status"
+              v-show="!budgetValid"
+            >
+              Informe um limite válido para calcular o percentual.
+            </p>
+          </div>
+          <AppProgress
+            v-if="budgetValid"
+            :value="budgetPercentage"
+            label="Orçamento utilizado"
+          />
         </section>
       </template>
     </AppTabs>
