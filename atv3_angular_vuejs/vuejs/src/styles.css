@@ -176,3 +176,23 @@ footer {
 .tab-panel {
   padding-top: 20px;
 }
+
+.pagination {
+  margin: 20px 0;
+}
+
+.pagination-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.page-button.is-active {
+  border-color: #111;
+  color: #fff;
+  background: #111;
+}
+
+.page-button.is-active:hover {
+  background: #333;
+}

@@ -3,6 +3,7 @@ import registerFinanceData from './services/financeData.js';
 import registerFinanceController from './controllers/financeController.js';
 import registerMoneyFilter from './filters/money.js';
 import registerTabs from './directives/tabs.js';
+import registerPagination from './directives/pagination.js';
 
 const dataModule = window.angular.module('finance.data', []);
 registerFinanceData(dataModule);
@@ -10,6 +11,7 @@ registerMoneyFilter(dataModule);
 
 const componentsModule = window.angular.module('finance.components', []);
 registerTabs(componentsModule);
+registerPagination(componentsModule);
 
 const app = window.angular.module('financeApp', [
   dataModule.name,

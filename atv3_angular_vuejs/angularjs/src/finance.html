@@ -36,6 +36,11 @@
           </tbody>
         </table>
       </div>
+      <finance-pagination
+        current-page="currentPage"
+        total-pages="totalPages"
+        on-page-change="changePage(page)"
+      ></finance-pagination>
     </finance-tab>
     <finance-tab title="Orçamento" tab-id="budget">
       <section class="budget">

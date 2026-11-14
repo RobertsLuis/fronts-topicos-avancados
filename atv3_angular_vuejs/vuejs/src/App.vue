@@ -2,9 +2,10 @@
 import { transactions } from './transactions.js';
 import { formatCurrency } from './formatCurrency.js';
 import AppTabs from './components/AppTabs.vue';
+import AppPagination from './components/AppPagination.vue';
 
 export default {
-  components: { AppTabs },
+  components: { AppTabs, AppPagination },
   data() {
     return {
       transactions,
@@ -12,11 +13,17 @@ export default {
         { id: 'transactions', title: 'Lançamentos' },
         { id: 'budget', title: 'Orçamento' },
       ],
+      currentPage: 1,
+      pageSize: 4,
     };
   },
   computed: {
+    totalPages() {
+      return Math.max(1, Math.ceil(this.transactions.length / this.pageSize));
+    },
     visibleTransactions() {
-      return this.transactions;
+      const start = (this.currentPage - 1) * this.pageSize;
+      return this.transactions.slice(start, start + this.pageSize);
     },
   },
   methods: {
@@ -65,6 +72,11 @@ export default {
             </tbody>
           </table>
         </div>
+        <AppPagination
+          :current-page="currentPage"
+          :total-pages="totalPages"
+          @change="currentPage = $event"
+        />
       </template>
       <template #budget>
         <section class="budget">
