@@ -14,6 +14,20 @@ export default function registerFinanceController(app) {
       ];
       $scope.expenses = FinanceData.getExpenses();
       $scope.budget = { limit: 2000 };
+      $scope.information = [
+        {
+          id: 'transactions',
+          title: 'Sobre os lançamentos',
+          content:
+            'São oito exemplos fictícios. O filtro escolhe o tipo e a paginação mostra os demais registros.',
+        },
+        {
+          id: 'budget',
+          title: 'Como funciona o orçamento?',
+          content:
+            'O percentual corresponde às despesas divididas pelo limite mensal. As receitas não entram nesse cálculo.',
+        },
+      ];
 
       function updateTransactions() {
         const filteredTransactions = $scope.transactions.filter(

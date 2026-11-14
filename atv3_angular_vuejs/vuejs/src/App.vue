@@ -5,9 +5,16 @@ import AppTabs from './components/AppTabs.vue';
 import AppPagination from './components/AppPagination.vue';
 import AppDropdown from './components/AppDropdown.vue';
 import AppProgress from './components/AppProgress.vue';
+import AppAccordion from './components/AppAccordion.vue';
 
 export default {
-  components: { AppTabs, AppPagination, AppDropdown, AppProgress },
+  components: {
+    AppTabs,
+    AppPagination,
+    AppDropdown,
+    AppProgress,
+    AppAccordion,
+  },
   data() {
     return {
       transactions,
@@ -24,6 +31,20 @@ export default {
         { value: 'expense', label: 'Despesas' },
       ],
       budgetLimit: 2000,
+      information: [
+        {
+          id: 'transactions',
+          title: 'Sobre os lançamentos',
+          content:
+            'São oito exemplos fictícios. O filtro escolhe o tipo e a paginação mostra os demais registros.',
+        },
+        {
+          id: 'budget',
+          title: 'Como funciona o orçamento?',
+          content:
+            'O percentual corresponde às despesas divididas pelo limite mensal. As receitas não entram nesse cálculo.',
+        },
+      ],
     };
   },
   computed: {
@@ -164,6 +185,9 @@ export default {
         </section>
       </template>
     </AppTabs>
+    <section class="information" aria-label="Informações">
+      <AppAccordion :items="information" />
+    </section>
     <footer>Dados fictícios para a atividade de Vue.js.</footer>
   </main>
 </template>

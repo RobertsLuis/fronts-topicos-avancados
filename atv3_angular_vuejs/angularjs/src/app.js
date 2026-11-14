@@ -6,6 +6,7 @@ import registerTabs from './directives/tabs.js';
 import registerPagination from './directives/pagination.js';
 import registerDropdown from './directives/dropdown.js';
 import registerProgress from './directives/progress.js';
+import registerAccordion from './directives/accordion.js';
 
 const dataModule = window.angular.module('finance.data', []);
 registerFinanceData(dataModule);
@@ -16,6 +17,7 @@ registerTabs(componentsModule);
 registerPagination(componentsModule);
 registerDropdown(componentsModule);
 registerProgress(componentsModule);
+registerAccordion(componentsModule);
 
 const app = window.angular.module('financeApp', [
   dataModule.name,
