@@ -1,0 +1,6 @@
+<template>
+  <main class="app">
+    <h1>Controle de finanças</h1>
+    <p>Receitas, despesas e orçamento mensal.</p>
+  </main>
+</template>

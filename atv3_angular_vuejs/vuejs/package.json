@@ -1,0 +1,21 @@
+{
+  "name": "finance-vuejs-exercise",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5177 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5177 --strictPort"
+  },
+  "dependencies": {
+    "vue": "3.5.45"
+  },
+  "devDependencies": {
+    "vite": "8.3.8",
+    "@vitejs/plugin-vue": "6.0.11"
+  }
+}
